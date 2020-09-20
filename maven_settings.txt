@@ -1,0 +1,32 @@
+# 替换maven的源
+vim /usr/local/maven/apache-maven-3.6.1/conf/settings.xml
+
+# 找到<mirrors></mirrors>标签对，添加一下代码：
+<mirror>
+     <id>alimaven</id>
+     <name>aliyun maven</name>
+     <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+     <mirrorOf>central</mirrorOf>
+</mirror>
+
+# 指定下载资源位置
+<localRepository>/usr/local/maven/repository</localRepository>
+
+# 指定JDK版本
+<profile>    
+     <id>jdk-1.8</id>    
+     <activation>    
+       <activeByDefault>true</activeByDefault>    
+       <jdk>1.8</jdk>    
+     </activation>    
+       <properties>    
+         <maven.compiler.source>1.8</maven.compiler.source>    
+         <maven.compiler.target>1.8</maven.compiler.target>    
+         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>    
+       </properties>    
+</profile>
+
+
+
+
+
