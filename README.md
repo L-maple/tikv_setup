@@ -1,6 +1,6 @@
-# 1.first, run the mvn_setup.sh, and alter the settings according to the settings.txt
+# 1.first, run java_setup.sh to install java environment.
 
-# 2.install the java environment, check it by running `mvn -v`
+# 2.second, run mvn_setup.sh to install maven environment.
 
-# 3.cd deps/ and run `sh mvn_install.sh` to install the dependencies
+# 3.third, run deps_install.sh to install project's dependencies.
 
