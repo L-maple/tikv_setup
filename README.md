@@ -4,4 +4,3 @@
 
 # 3.cd deps/ and run `sh mvn_install.sh` to install the dependencies
 
-# 4.
