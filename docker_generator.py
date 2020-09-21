@@ -4,8 +4,9 @@
 from xml.etree.ElementTree import parse
 
 def alterMainClass(mainClassName):
+   filepath="recommendation-keti2-v9.1/pom.xml"
    # get the root of the xml tree
-   tree = parse("pom.xml")
+   tree = parse(filepath)
    root = tree.getroot()
    
    # set the tag prefix
@@ -27,7 +28,8 @@ def alterMainClass(mainClassName):
                      mainClass.text = mainClassName
 
    # write the changes
-   tree.write("pom.xml")
+   tree.write(filepath)
+   print "mainclass has been changed to " + mainClassName + "."
 
 
 if __name__ == "__main__":
