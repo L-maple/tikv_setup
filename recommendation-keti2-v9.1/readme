@@ -1,0 +1,9 @@
+﻿1. 设置主类：修改pom.xml文件中的mainClass选项为主类名
+
+2. 编译并构建项目：mvn clean install
+,编译后，会生成一个target目录，里面的Jar包就是需要的。
+3. 针对生成的jar包，执行Dockerfile构建镜像：docker build -f Dockerfile -t fj2018104085/recommendation-tikv-loaditem:v1.0 .
+4. 将本地镜像上传至docker hub仓库：docker push fj2018104085/recommendation-tikv-loaditem:v1.0
+后面的操作需要在kubectl客户端进行，而不是当前服务器：
+1. 在kubectl客户端，下载该镜像，docker pull fj2018104085/recommendation-tikv-loaditem:v1.0
+2. 在kubectl客户端，执行相应的yaml文件
