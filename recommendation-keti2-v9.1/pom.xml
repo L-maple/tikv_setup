@@ -1,174 +1,172 @@
-<ns0:project xmlns:ns0="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <ns0:modelVersion>4.0.0</ns0:modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-    <ns0:groupId>cn.edu.neu.tiger</ns0:groupId>
-    <ns0:artifactId>recommendation-keti2</ns0:artifactId>
-    <ns0:version>1.0-SNAPSHOT</ns0:version>
-    <ns0:packaging>jar</ns0:packaging>
+    <groupId>cn.edu.neu.tiger</groupId>
+    <artifactId>recommendation-keti2</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-    <ns0:name>recommendation-keti2</ns0:name>
+    <name>recommendation-keti2</name>
 
-    <ns0:properties>
-        <ns0:project.build.sourceEncoding>UTF-8</ns0:project.build.sourceEncoding>
-        <ns0:flink.version>1.8.0</ns0:flink.version>
-        <ns0:java.version>1.8</ns0:java.version>
-        <ns0:scala.binary.version>2.11</ns0:scala.binary.version>
-        <ns0:scala.major.version>2.11</ns0:scala.major.version>
-        <ns0:maven.compiler.source>${java.version}</ns0:maven.compiler.source>
-        <ns0:maven.compiler.target>${java.version}</ns0:maven.compiler.target>
-        <ns0:flink.ml.version>0.3.0</ns0:flink.ml.version>
-    </ns0:properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <flink.version>1.8.0</flink.version>
+        <java.version>1.8</java.version>
+        <scala.binary.version>2.11</scala.binary.version>
+        <scala.major.version>2.11</scala.major.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <flink.ml.version>0.3.0</flink.ml.version>
+    </properties>
 
-    <ns0:dependencies>
+    <dependencies>
         
         
-        <ns0:dependency>
-            <ns0:groupId>org.apache.flink</ns0:groupId>
-            <ns0:artifactId>flink-java</ns0:artifactId>
-            <ns0:version>${flink.version}</ns0:version>
-        </ns0:dependency>
-        <ns0:dependency>
-            <ns0:groupId>org.apache.flink</ns0:groupId>
-            <ns0:artifactId>flink-streaming-java_${scala.binary.version}</ns0:artifactId>
-            <ns0:version>${flink.version}</ns0:version>
-        </ns0:dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-java</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-streaming-java_${scala.binary.version}</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
 
-        <ns0:dependency>
-            <ns0:groupId>org.apache.flink</ns0:groupId>
-            <ns0:artifactId>flink-connector-kafka-0.11_2.11</ns0:artifactId>
-            <ns0:version>${flink.version}</ns0:version>
-        </ns0:dependency>
-        <ns0:dependency>
-            <ns0:groupId>com.aliyun.openservices</ns0:groupId>
-            <ns0:artifactId>flink-log-connector</ns0:artifactId>
-            <ns0:version>0.1.16</ns0:version>
-        </ns0:dependency>
-
-        
-        <ns0:dependency>
-            <ns0:groupId>org.slf4j</ns0:groupId>
-            <ns0:artifactId>slf4j-api</ns0:artifactId>
-            <ns0:version>1.7.25</ns0:version>
-        </ns0:dependency>
-        <ns0:dependency>
-            <ns0:groupId>org.slf4j</ns0:groupId>
-            <ns0:artifactId>slf4j-log4j12</ns0:artifactId>
-            <ns0:version>1.7.25</ns0:version>
-        </ns0:dependency>
-
-        <ns0:dependency>
-            <ns0:groupId>org.apache.hadoop</ns0:groupId>
-            <ns0:artifactId>hadoop-client</ns0:artifactId>
-            <ns0:version>2.7.0</ns0:version>
-	    <ns0:exclusions>
-                <ns0:exclusion>
-                    <ns0:groupId>xml-apis</ns0:groupId>
-                    <ns0:artifactId>xml-apis</ns0:artifactId>
-                </ns0:exclusion>
-            </ns0:exclusions>
-        </ns0:dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-kafka-0.11_2.11</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun.openservices</groupId>
+            <artifactId>flink-log-connector</artifactId>
+            <version>0.1.16</version>
+        </dependency>
 
         
-        
-        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+            <version>2.7.0</version>
+	    <exclusions>
+                <exclusion>
+                    <groupId>xml-apis</groupId>
+                    <artifactId>xml-apis</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         
         
         
-        <ns0:dependency>
-            <ns0:groupId>com.alibaba.flink.ml</ns0:groupId>
-            <ns0:artifactId>flink-ml-framework</ns0:artifactId>
-            <ns0:version>${flink.ml.version}</ns0:version>
-        </ns0:dependency>
-        <ns0:dependency>
-            <ns0:groupId>com.alibaba.flink.ml</ns0:groupId>
-            <ns0:artifactId>flink-ml-operator</ns0:artifactId>
-            <ns0:version>${flink.ml.version}</ns0:version>
-        </ns0:dependency>
-        <ns0:dependency>
-            <ns0:groupId>com.alibaba.flink.ml</ns0:groupId>
-            <ns0:artifactId>flink-ml-athena</ns0:artifactId>
-            <ns0:version>${flink.ml.version}</ns0:version>
-        </ns0:dependency>
+        
+        
+        
+        <dependency>
+            <groupId>com.alibaba.flink.ml</groupId>
+            <artifactId>flink-ml-framework</artifactId>
+            <version>${flink.ml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.flink.ml</groupId>
+            <artifactId>flink-ml-operator</artifactId>
+            <version>${flink.ml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.flink.ml</groupId>
+            <artifactId>flink-ml-athena</artifactId>
+            <version>${flink.ml.version}</version>
+        </dependency>
 
         
-        <ns0:dependency>
-            <ns0:groupId>org.tikv</ns0:groupId>
-            <ns0:artifactId>tikv-client-java</ns0:artifactId>
-            <ns0:version>2.0-SNAPSHOT</ns0:version>
-        </ns0:dependency>
+        <dependency>
+            <groupId>org.tikv</groupId>
+            <artifactId>tikv-client-java</artifactId>
+            <version>2.0-SNAPSHOT</version>
+        </dependency>
 
-        <ns0:dependency>
-            <ns0:groupId>com.alibaba</ns0:groupId>
-            <ns0:artifactId>fastjson</ns0:artifactId>
-            <ns0:version>1.2.58</ns0:version>
-        </ns0:dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
+        </dependency>
 
         
-        <ns0:dependency>
-            <ns0:groupId>com.flipkart.lego</ns0:groupId>
-            <ns0:artifactId>lois</ns0:artifactId>
-            <ns0:version>1.0.0</ns0:version>
-        </ns0:dependency>
+        <dependency>
+            <groupId>com.flipkart.lego</groupId>
+            <artifactId>lois</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
-        <ns0:dependency>
-            <ns0:groupId>org.apache.flink</ns0:groupId>
-            <ns0:artifactId>flink-table-planner_2.11</ns0:artifactId>
-            <ns0:version>${flink.version}</ns0:version>
-        </ns0:dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-table-planner_2.11</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
         
-        <ns0:dependency>
-            <ns0:groupId>org.apache.kafka</ns0:groupId>
-            <ns0:artifactId>kafka-clients</ns0:artifactId>
-            <ns0:version>2.3.1</ns0:version>
-        </ns0:dependency>
-    </ns0:dependencies>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+    </dependencies>
 
-    <ns0:build>
-        <ns0:plugins>
+    <build>
+        <plugins>
             
-            <ns0:plugin>
-                <ns0:groupId>org.apache.maven.plugins</ns0:groupId>
-                <ns0:artifactId>maven-compiler-plugin</ns0:artifactId>
-                <ns0:version>3.1</ns0:version>
-                <ns0:configuration>
-                    <ns0:source>${java.version}</ns0:source>
-                    <ns0:target>${java.version}</ns0:target>
-                </ns0:configuration>
-            </ns0:plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
 
-            <ns0:plugin>
-                <ns0:groupId>net.alchim31.maven</ns0:groupId>
-                <ns0:artifactId>scala-maven-plugin</ns0:artifactId>
-                <ns0:version>3.2.2</ns0:version>
-                <ns0:executions>
-                    <ns0:execution>
-                        <ns0:id>eclipse-add-source</ns0:id>
-                        <ns0:goals>
-                            <ns0:goal>add-source</ns0:goal>
-                        </ns0:goals>
-                    </ns0:execution>
-                    <ns0:execution>
-                        <ns0:id>scala-compile-first</ns0:id>
-                        <ns0:phase>process-resources</ns0:phase>
-                        <ns0:goals>
-                            <ns0:goal>compile</ns0:goal>
-                        </ns0:goals>
-                    </ns0:execution>
-                </ns0:executions>
-                <ns0:configuration>
-                    <ns0:scalaVersion>${scala.major.version}</ns0:scalaVersion>
-                    <ns0:recompileMode>incremental</ns0:recompileMode>
-                    <ns0:useZincServer>true</ns0:useZincServer>
-                    <ns0:args>
-                        <ns0:arg>-unchecked</ns0:arg>
-                        <ns0:arg>-deprecation</ns0:arg>
-                        <ns0:arg>-feature</ns0:arg>
-                    </ns0:args>
-                </ns0:configuration>
-            </ns0:plugin>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>3.2.2</version>
+                <executions>
+                    <execution>
+                        <id>eclipse-add-source</id>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>scala-compile-first</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <scalaVersion>${scala.major.version}</scalaVersion>
+                    <recompileMode>incremental</recompileMode>
+                    <useZincServer>true</useZincServer>
+                    <args>
+                        <arg>-unchecked</arg>
+                        <arg>-deprecation</arg>
+                        <arg>-feature</arg>
+                    </args>
+                </configuration>
+            </plugin>
 
-            
-            
             
             
             
@@ -178,86 +176,88 @@
             
             
             
+            
+            
 
-            <ns0:plugin>
-                <ns0:groupId>org.apache.maven.plugins</ns0:groupId>
-                <ns0:artifactId>maven-shade-plugin</ns0:artifactId>
-                <ns0:version>2.3</ns0:version>
-                <ns0:executions>
-                    <ns0:execution>
-                        <ns0:phase>package</ns0:phase>
-                        <ns0:goals>
-                            <ns0:goal>shade</ns0:goal>
-                        </ns0:goals>
-                        <ns0:configuration>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
 			    
                             
-                            <ns0:artifactSet>
-                                <ns0:excludes>
-                                    <ns0:exclude>com.google.protobuf:*</ns0:exclude>
-                                    <ns0:exclude>xerces:xercesImpl</ns0:exclude>
+                            <artifactSet>
+                                <excludes>
+                                    <exclude>com.google.protobuf:*</exclude>
+                                    <exclude>xerces:xercesImpl</exclude>
                                     
-                                    <ns0:exclude>org.scala-lang:*</ns0:exclude>
-                                    <ns0:exclude>com.typesafe.akka:*</ns0:exclude>
-                                    <ns0:exclude>org.apache.ant:</ns0:exclude>
-                                    <ns0:exclude>org.apache.directory.server:*</ns0:exclude>
-                                    <ns0:exclude>org.apache.directory.api:*</ns0:exclude>
-                                    <ns0:exclude>org.apache.logging.log4j:*</ns0:exclude>
-                                    <ns0:exclude>com.aliyun:*</ns0:exclude>
-                                    <ns0:exclude>org.apache.orc:*</ns0:exclude>
-                                    <ns0:exclude>com.alibaba.niagara:*</ns0:exclude>
-                                    <ns0:exclude>org.apache.ant:*</ns0:exclude>
-                                    <ns0:exclude>org.apache.ivy:*</ns0:exclude>
-                                    <ns0:exclude>org.scala-lang.modules:*</ns0:exclude>
-                                    <ns0:exclude>org.apache.maven:*</ns0:exclude>
-                                    <ns0:exclude>com.alibaba.blink:*</ns0:exclude>
-                                    <ns0:exclude>com.data-artisans:*</ns0:exclude>
-                                    <ns0:exclude>com.esotericsoftware.kryo:*</ns0:exclude>
-                                    <ns0:exclude>com.esotericsoftware:*</ns0:exclude>
-                                    <ns0:exclude>com.fasterxml.jackson.core:*</ns0:exclude>
-                                    <ns0:exclude>com.github.scopt:*</ns0:exclude>
-                                    <ns0:exclude>commons-el:commons-el</ns0:exclude>
-                                    <ns0:exclude>commons-validator:commons-validator</ns0:exclude>
-                                    <ns0:exclude>com.twitter:*</ns0:exclude>
-                                    <ns0:exclude>com.typesafe:config</ns0:exclude>
-                                    <ns0:exclude>org.apache.parquet:*</ns0:exclude>
-                                    <ns0:exclude>org.apache.sling:org.apache.sling.commons.json</ns0:exclude>
-                                    <ns0:exclude>org.apache.thrift:libthrift</ns0:exclude>
-                                    <ns0:exclude>org.apache.avro:*</ns0:exclude>
-                                    <ns0:exclude>org.apache.camel:camel-core</ns0:exclude>
-                                    <ns0:exclued>org.antlr:*</ns0:exclued>
-                                    <ns0:exclued>log4j:apache-log4j-extras</ns0:exclued>
-                                    <ns0:exclued>io.netty:netty-all</ns0:exclued>
-                                    <ns0:exclued>javolution:javolution</ns0:exclued>
-                                    <ns0:exclued>joda-time:joda-time</ns0:exclued>
-                                    <ns0:exclued>org.iq80.snappy:snappy</ns0:exclued>
-                                    <ns0:exclued>org.javassist:javassist</ns0:exclued>
-                                    <ns0:exclude>org.spark-project.hive:*</ns0:exclude>
-                                    <ns0:exclude>org.rocksdb:rocksdbjni</ns0:exclude>
-                                </ns0:excludes>
-                            </ns0:artifactSet>
-                            <ns0:filters>
-                                <ns0:filter>
-                                    <ns0:artifact>*:*</ns0:artifact>
-                                    <ns0:excludes>
-                                        <ns0:exclude>META-INF/*.SF</ns0:exclude>
-                                        <ns0:exclude>META-INF/*.DSA</ns0:exclude>
-                                        <ns0:exclude>META-INF/*.RSA</ns0:exclude>
-                                    </ns0:excludes>
-                                </ns0:filter>
-                            </ns0:filters>
-                            <ns0:transformers>
-                                <ns0:transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-                                <ns0:transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <ns0:mainClass>cn.edu.neu.tiger.RecPipelineWithPrometheus333</ns0:mainClass>
-                                </ns0:transformer>
-                            </ns0:transformers>
+                                    <exclude>org.scala-lang:*</exclude>
+                                    <exclude>com.typesafe.akka:*</exclude>
+                                    <exclude>org.apache.ant:</exclude>
+                                    <exclude>org.apache.directory.server:*</exclude>
+                                    <exclude>org.apache.directory.api:*</exclude>
+                                    <exclude>org.apache.logging.log4j:*</exclude>
+                                    <exclude>com.aliyun:*</exclude>
+                                    <exclude>org.apache.orc:*</exclude>
+                                    <exclude>com.alibaba.niagara:*</exclude>
+                                    <exclude>org.apache.ant:*</exclude>
+                                    <exclude>org.apache.ivy:*</exclude>
+                                    <exclude>org.scala-lang.modules:*</exclude>
+                                    <exclude>org.apache.maven:*</exclude>
+                                    <exclude>com.alibaba.blink:*</exclude>
+                                    <exclude>com.data-artisans:*</exclude>
+                                    <exclude>com.esotericsoftware.kryo:*</exclude>
+                                    <exclude>com.esotericsoftware:*</exclude>
+                                    <exclude>com.fasterxml.jackson.core:*</exclude>
+                                    <exclude>com.github.scopt:*</exclude>
+                                    <exclude>commons-el:commons-el</exclude>
+                                    <exclude>commons-validator:commons-validator</exclude>
+                                    <exclude>com.twitter:*</exclude>
+                                    <exclude>com.typesafe:config</exclude>
+                                    <exclude>org.apache.parquet:*</exclude>
+                                    <exclude>org.apache.sling:org.apache.sling.commons.json</exclude>
+                                    <exclude>org.apache.thrift:libthrift</exclude>
+                                    <exclude>org.apache.avro:*</exclude>
+                                    <exclude>org.apache.camel:camel-core</exclude>
+                                    <exclued>org.antlr:*</exclued>
+                                    <exclued>log4j:apache-log4j-extras</exclued>
+                                    <exclued>io.netty:netty-all</exclued>
+                                    <exclued>javolution:javolution</exclued>
+                                    <exclued>joda-time:joda-time</exclued>
+                                    <exclued>org.iq80.snappy:snappy</exclued>
+                                    <exclued>org.javassist:javassist</exclued>
+                                    <exclude>org.spark-project.hive:*</exclude>
+                                    <exclude>org.rocksdb:rocksdbjni</exclude>
+                                </excludes>
+                            </artifactSet>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>cn.edu.neu.tiger.tikv.data.CreateItemDataByTiKV</mainClass>
+                                </transformer>
+                            </transformers>
 
-                        </ns0:configuration>
-                    </ns0:execution>
-                </ns0:executions>
-            </ns0:plugin>
-        </ns0:plugins>
-    </ns0:build>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
-</ns0:project>
+</project>

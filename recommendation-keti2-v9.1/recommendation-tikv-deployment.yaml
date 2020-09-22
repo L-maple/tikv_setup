@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+
+  name: tikv-test-app-deploy
+  namespace: tidb-cluster
+
+spec:
+
+  replicas: 1
+  
+  selector:
+
+   matchLabels:
+
+    app: tikv-test-app
+
+    release: stabel
+
+  template:
+
+    metadata:
+
+      labels:
+
+        app: tikv-test-app
+        
+        release: stabel
+        env: test
+    spec:
+
+      containers:
+
+      - name: tikv-test-app
+
+        image: fj2018104085/recommendation-tikv-loaditem:v1.0
+
+        imagePullPolicy: IfNotPresent
+        
+        ports:
+        
+        - name: tidb-cluster-pd
+          containerPort: 2379
