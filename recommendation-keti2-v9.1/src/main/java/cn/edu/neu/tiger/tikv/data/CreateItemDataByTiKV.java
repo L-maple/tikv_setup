@@ -86,7 +86,7 @@ public class CreateItemDataByTiKV {
 //    item_features.add("item_virtual_feature28");
 //    item_features.add("item_virtual_feature29");
 //    item_features.add("item_virtual_feature30");
-    generate(768100); //1000万条数据，每个kv对大小为1KB，item表数据量为10G
+    generate(768105); //1000万条数据，每个kv对大小为1KB，item表数据量为10G
   }
   // 创建一个item表，该表是由一个"cf"列族，以及由15个特征作为列来形成的，generate方法会向该表插入200条记录
   public static void generate(int num) throws Exception {

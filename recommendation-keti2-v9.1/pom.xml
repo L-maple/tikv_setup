@@ -249,7 +249,7 @@
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>cn.edu.neu.tiger.tikv.data.CreateItemDataByTiKV</mainClass>
+                                    <mainClass>cn.edu.neu.tiger.tikv.data.WriteClickRecordToTiKV</mainClass>
                                 </transformer>
                             </transformers>
 
