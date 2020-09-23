@@ -20,7 +20,7 @@ public class WriteClickRecordToTiKV {
   public static void main(String[] args) throws Exception {
     //    String PD_ADDRESS = "127.0.0.1:2379";
     TiKVStorageService storageService = new TikvServiceImpl(Constants.PD_ADDRESS); // 创建Tikv服务
-    int recordNum = 16043400;//1000万条数据，每个kv对大小为1KB，click表数据量为10G
+    int recordNum = 160434;//1000万条数据，每个kv对大小为1KB，click表数据量为10G
     Random random = new Random();
 
     // 循环插入click表的KV数据，同时暂时创建分别关于user_id和flag的非唯一索引
