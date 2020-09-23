@@ -30,6 +30,14 @@ EOF
 echo "generate docker image..."
 docker build -f Dockerfile -t aliuchangjie/recommendation-tikv-loaditem .
 echo "the recommendation-tikv-loaditem has been created successfully!!!"
+echo "kubectl apply the tikv-loaditem-job.yaml..."
+isNamespaceExist=`kubectl get namespace | grep tidb-cluster`
+if [[ $isNamespaceExist == "" ]]
+then
+    kubectl create namespace tidb-cluster
+fi
+kubectl apply -f tikv-loaditem-job.yaml
+echo "+++++++++++++++++++++++++++++++++"
 
 # delete the alter_mainclass.py
 rm -f $alterShellFileName

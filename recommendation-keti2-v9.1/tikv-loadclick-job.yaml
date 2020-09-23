@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: tikv-loadclick-job
+  namespace: tidb-cluster
+spec:
+  template:
+    spec:
+      containers:
+      - name: tikv-loadclick-job
+        image: aliuchangjie/recommendation-tikv-loadclick
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: tidb-cluster-pd
+          containerPort: 2379
+      restartPolicy: Never
+  backoffLimit: 4
