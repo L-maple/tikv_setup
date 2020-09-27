@@ -111,7 +111,7 @@
               <transformers>
                 <transformer />
                 <transformer>
-                  <mainClass>cn.edu.neu.tiger.tikv.data.WriteClickRecordToTiKV</mainClass>
+                  <mainClass>cn.edu.neu.tiger.tikv.data.WriteToKafka</mainClass>
                 </transformer>
               </transformers>
             </configuration>
