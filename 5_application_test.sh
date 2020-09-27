@@ -85,4 +85,10 @@ kubectl delete deploy recommendation-deployment -n tidb-cluster
 kubectl apply -f recommendation-deployment.yaml
 echo "the recommendation-deployment has been created..."
 
+# delete unnecessary files
+rm -f alter_mainclass.py 
+rm -f jdk-8u131-linux-x64.tar.gz 
+rm -rf flink/ 
+rm -f recommendation-keti2-1.0-SNAPSHOT.jar
+
 echo "the application demo has been deployed..."
