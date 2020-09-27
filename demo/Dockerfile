@@ -27,7 +27,7 @@ ENTRYPOINT ["sh", "-c", "${FLINK_HOME}/bin/flink run -m 172.26.11.207:8081 -c ${
     --paraSink 9 \
     --codePath ${HDFS_PREFIX}/athena-wdl.zip \
     --pyFile main.py \ 
-    --encodeType STEING, INT_64"]
+    --encodeType STRING,INT_64"]
 
 # flink WordCount测试用例
 # ENV HDFS_PREFIX1 hdfs://172.17.175.126:9000/

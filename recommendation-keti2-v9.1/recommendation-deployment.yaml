@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recommendation-deployment
+  namespace: tidb-cluster
+spec:
+  replicas: 1
+  selector:
+   matchLabels:
+    app: recommendation-deployment
+    release: stable
+  template:
+    metadata:
+      labels:
+        app: recommendation-deployment
+        release: stable
+        env: test
+    spec:
+      containers:
+      - name: recommendation-deployment
+        image: recommendation-deployment:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: tidb-cluster-pd
+          containerPort: 2379

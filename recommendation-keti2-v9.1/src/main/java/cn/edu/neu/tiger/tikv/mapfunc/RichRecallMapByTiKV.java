@@ -54,7 +54,7 @@ public class RichRecallMapByTiKV extends RichMapFunction<String, Tuple2<String, 
 	public Tuple2<String, List<String>> map(String value) throws Exception {
 		Long time = System.currentTimeMillis();
 		Tuple2<String, List<String>> resultFromTiKV = recallFromTiKV.recall_new(value, this.i2i);
-
+		System.out.println("userid: "+value);
 		recall_data.inc();
 		logger.info("{} recall cost: {}", value, (System.currentTimeMillis() - time));
 		return resultFromTiKV;

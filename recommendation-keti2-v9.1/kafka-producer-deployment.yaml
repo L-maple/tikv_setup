@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-producer-deployment
+  namespace: tidb-cluster
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-producer-deployment
+      release: stable
+  template:
+    metadata:
+      labels:
+        app: kafka-producer-deployment
+        release: stable
+        env: test
+    spec:
+      containers:
+      - name: kafka-producer-deployment
+        image: aliuchangjie/recommendation-kafka
+        imagePullPolicy: IfNotPresent
