@@ -17,5 +17,5 @@ ENV FLINK_HOME /opt/flink
 ENV HDFS_PREFIX hdfs://172.17.175.126:9000/data/keti3
 ENV CLAZZ cn.edu.neu.tiger.RecPipelineWithPrometheus
 
-ENTRYPOINT ["sh", "-c", "/opt/flink/bin/flink run -m 172.26.11.207:8081 -c cn.edu.neu.tiger.RecPipelineWithPrometheus     /alidemo.jar     --paraKafka 24     --paraRecall 24     --paraGen 24     --paraInference 24     --paraSink 24     --codePath hdfs://172.17.175.126:9000/data/keti3/athena-wdl.zip     --pyFile main.py \ 
+ENTRYPOINT ["sh", "-c", "/opt/flink/bin/flink run -m 172.26.11.207:8081 -c cn.edu.neu.tiger.RecPipelineWithPrometheus     /alidemo.jar     --paraKafka 10     --paraRecall 10     --paraGen 10     --paraInference 10     --paraSink 10     --codePath hdfs://172.17.175.126:9000/data/keti3/athena-wdl.zip     --pyFile main.py \ 
     --encodeType STRING,INT_64"]
