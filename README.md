@@ -23,10 +23,14 @@
 `note:` data size in (CreateItemDataByTiKV, CreateUserDataByTiKV, WriteClickRecordToTiKV) should be altered as wanted;
 
 ### 5_application_test.sh
-`function:` deploy the recommendation_application and kafka-producer
-
+`function:` deploy the recommendation_application 
 `prerequisites:` jdk-8u131-linux-x64.tar.gz, flink/
 
 `check:` kubectl get deploy -n tidb-cluster
 
 `note:` (1) parallism can be altered in the dockerfile string;
+
+### 6_kafka_producer.sh
+`function:` deploy the kafka producer
+
+`check:` kubectl get deploy -n tidb-cluster
