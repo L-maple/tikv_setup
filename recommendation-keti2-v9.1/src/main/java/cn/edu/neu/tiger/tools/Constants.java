@@ -5,7 +5,7 @@ public class Constants {
 	//kafka
 	public final static String KAFKA_SOURCE_TOPIC = "userclick";
 	public final static String KAFKA_BOOTSTRAP = "bootstrap.servers";
-	public final static String KAFKA_BOOTSTRAP_VALUE = "master:9092";
+	public final static String KAFKA_BOOTSTRAP_VALUE = "172.17.175.126:9092";
 	//	public final static String KAFKA_BOOTSTRAP_VALUE = "11.227.70.150:9092,11.251.155.243:9092,11.251.155.142:9092";
 	public final static String KAFKA_BATCH_SIZE = "batch.size";
 	public final static String KAFKA_BUFFER_MEMORY = "buffer.memory";
@@ -15,7 +15,7 @@ public class Constants {
 	public final static String KAFKA_LINGER_MS = "linger.ms";
 	public final static String KAFKA_ACKS = "acks";
 	public static final String ZK_CONNECT = "zookeeper.connect";
-	public final static String ZOOKEEPER_QUORUM_VALUE = "master";//11.227.70.150
+	public final static String ZOOKEEPER_QUORUM_VALUE = "172.17.175.126";//11.227.70.150
 	public final static String ZOOKEEPER_CLIENT_PORT_VALUE = "2081";
 //	public final static String ZOOKEEPER_CLIENT="172.21.0.15:2181,172.21.0.14:2181,172.21.0.7:2181,172.21.0.4:2181,172.21.0.5:2181,172.21.0.9:2181,172.21.0.10:2181";
 	//sls
@@ -48,7 +48,7 @@ public class Constants {
 	public final static String CONFIG_ZOOKEEPER_BASE_PATH = "/qiqi.zp";
 
 	//tikv parameters
-	public static final String PD_ADDRESS = "tidb-cluster-pd:2379";
+	public static final String PD_ADDRESS = "tidb-cluster-pd.tidb-cluster.svc:2379";
 	public static final String ROWID_MAX =
 			"9999999999"; // in ByteString, 0 < 10 < 11 < 19 < 1 < 20 < 20 < 29. so 9 is the biggest
 	public static final String USERID_MAX = "9999999999"; // Integer.MAX_VALUE = 2147483647
