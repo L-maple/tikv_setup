@@ -47,6 +47,7 @@ public class RecPipelineWithPrometheus {
 	public static void main(String[] args) throws Exception {
 		StreamExecutionEnvironment streamEnv = StreamContextEnvironment.getExecutionEnvironment();
 		streamEnv.disableOperatorChaining();
+		//streamEnv.setRestartStrategy(RestartStrategies.noRestart());
 		run(args, streamEnv);
 		streamEnv.execute();
 	}
