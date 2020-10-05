@@ -860,7 +860,7 @@ public class TikvServiceImpl implements TiKVStorageService, Serializable {
 	    //Long getOneItemTime = System.currentTimeMillis();
             Map<String, String> itemCells = getDataByKey(Constants.TABLE_ITEM, itemId);
             //System.out.println("###########get one item cost:"+(System.currentTimeMillis() - getOneItemTime)+"ms ######################itemId is: "+itemId+"######################");
-	    
+	    /*
 	    Map<String, String> itemInfo = TikvUtil.getRowByCells(itemCells, featureTransMap);
             if (itemInfo.isEmpty()) {
                 itemInfo = Util.getItemMap();
@@ -869,7 +869,7 @@ public class TikvServiceImpl implements TiKVStorageService, Serializable {
             Map<String, String> sample = Util.getSample(userInfo, itemInfo);
             result.append(JSONObject.toJSONString(sample));
             result.append(",");
-	    
+	 */   
         }
 	//System.out.println("----------------------get all items cost:"+(System.currentTimeMillis() - getAllItemTime)+"ms -----------");
 	result.append(JSONObject.toJSONString(userInfo));

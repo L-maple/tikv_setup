@@ -15,6 +15,8 @@ python alter_mainclass.py cn.edu.neu.tiger.tikv.data.RecPipelineWithPrometheus
 
 mvn clean install
 
+stat target
+
 echo "copy jar package in the current dir..."
 cp target/recommendation-keti2-1.0-SNAPSHOT.jar .
 
