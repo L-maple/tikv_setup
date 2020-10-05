@@ -43,11 +43,11 @@ ENV CLAZZ cn.edu.neu.tiger.RecPipelineWithPrometheus
 
 ENTRYPOINT ["sh", "-c", "/opt/flink/bin/flink run -m 172.26.11.207:8081 -c cn.edu.neu.tiger.RecPipelineWithPrometheus \
     /alidemo.jar \
-    --paraKafka 10 \
-    --paraRecall 10 \
-    --paraGen 10 \
-    --paraInference 10 \
-    --paraSink 10 \
+    --paraKafka 1 \
+    --paraRecall 1 \
+    --paraGen 1 \
+    --paraInference 1 \
+    --paraSink 1 \
     --codePath hdfs://172.17.175.126:9000/data/keti3/athena-wdl.zip \
     --pyFile main.py \ 
     --encodeType STRING,INT_64"]
