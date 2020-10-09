@@ -97,6 +97,7 @@ public class RecPipelineWithoutWrite {
                 .name("GetTopK")
                 .setParallelism(1);
 
+<<<<<<< HEAD
        /**
         * 5.将推荐结果写入kv系统，以满足演示系统读取需求 kv
         */
@@ -104,6 +105,15 @@ public class RecPipelineWithoutWrite {
                .returns(TypeInformation.of(new TypeHint<Tuple3<String, List<String>, Long>>() {
                }))
                .setParallelism(1);
+=======
+//        /**
+//         * 5.将推荐结果写入kv系统，以满足演示系统读取需求 kv
+//         */
+//        DataStream<Tuple3<String, List<String>, Long>> result = recommendation.map(new RichSinkMapByTiKVWithPrometheus())
+//                .returns(TypeInformation.of(new TypeHint<Tuple3<String, List<String>, Long>>() {
+//                }))
+//                .setParallelism(1);
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
 
         recommendation.map((res) -> {
             logger.info(String.format("User[%s] rec: [%s]",

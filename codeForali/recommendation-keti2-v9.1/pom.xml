@@ -1,10 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
     <groupId>cn.edu.neu.tiger</groupId>
     <artifactId>recommendation-keti2</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+<<<<<<< HEAD
     <name>recommendation-keti2</name>
+=======
+
+    <name>recommendation-keti2</name>
+
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <flink.version>1.8.0</flink.version>
@@ -15,7 +25,14 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <flink.ml.version>0.3.0</flink.ml.version>
     </properties>
+<<<<<<< HEAD
     <dependencies>
+=======
+
+    <dependencies>
+        
+        
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-java</artifactId>
@@ -26,6 +43,10 @@
             <artifactId>flink-streaming-java_${scala.binary.version}</artifactId>
             <version>${flink.version}</version>
         </dependency>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-connector-kafka-0.11_2.11</artifactId>
@@ -36,6 +57,11 @@
             <artifactId>flink-log-connector</artifactId>
             <version>0.1.16</version>
         </dependency>
+<<<<<<< HEAD
+=======
+
+        
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -46,6 +72,10 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.25</version>
         </dependency>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
@@ -57,6 +87,16 @@
                 </exclusion>
             </exclusions>
         </dependency>
+<<<<<<< HEAD
+=======
+
+        
+        
+        
+        
+        
+        
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
         <dependency>
             <groupId>com.alibaba.flink.ml</groupId>
             <artifactId>flink-ml-framework</artifactId>
@@ -72,31 +112,54 @@
             <artifactId>flink-ml-athena</artifactId>
             <version>${flink.ml.version}</version>
         </dependency>
+<<<<<<< HEAD
+=======
+
+        
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
         <dependency>
             <groupId>org.tikv</groupId>
             <artifactId>tikv-client-java</artifactId>
             <version>2.0-SNAPSHOT</version>
         </dependency>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.58</version>
         </dependency>
+<<<<<<< HEAD
+=======
+
+        
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
         <dependency>
             <groupId>com.flipkart.lego</groupId>
             <artifactId>lois</artifactId>
             <version>1.0.0</version>
         </dependency>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-table-planner_2.11</artifactId>
             <version>${flink.version}</version>
         </dependency>
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
             <version>2.3.1</version>
         </dependency>
+<<<<<<< HEAD
 	 
         <dependency>
             <groupId>org.apache.hbase</groupId>
@@ -135,6 +198,13 @@
     </dependencies>
     <build>
         <plugins>
+=======
+    </dependencies>
+
+    <build>
+        <plugins>
+            
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -144,6 +214,10 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
@@ -174,6 +248,22 @@
                     </args>
                 </configuration>
             </plugin>
+<<<<<<< HEAD
+=======
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -185,10 +275,19 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+<<<<<<< HEAD
+=======
+			    
+                            
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
                             <artifactSet>
                                 <excludes>
                                     <exclude>com.google.protobuf:*</exclude>
                                     <exclude>xerces:xercesImpl</exclude>
+<<<<<<< HEAD
+=======
+                                    
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
                                     <exclude>org.scala-lang:*</exclude>
                                     <exclude>com.typesafe.akka:*</exclude>
                                     <exclude>org.apache.ant:</exclude>
@@ -241,9 +340,16 @@
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+<<<<<<< HEAD
                                     <mainClass>cn.edu.neu.tiger.tikv.LoadDataToTiKV</mainClass>
                                 </transformer>
                             </transformers>
+=======
+                                    <mainClass>cn.edu.neu.tiger.tikv.data.WriteToKafka</mainClass>
+                                </transformer>
+                            </transformers>
+
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
                         </configuration>
                     </execution>
                 </executions>

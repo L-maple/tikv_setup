@@ -7,9 +7,12 @@ import cn.edu.neu.tiger.tools.*;
 import com.alibaba.fastjson.JSONObject;
 import cn.edu.neu.tiger.tikv.service.TiKVStorageService;
 
+<<<<<<< HEAD
 import cn.edu.neu.tiger.tikv.service.StorageService;
 import cn.edu.neu.tiger.tikv.impl.HBaseServiceImpl;
 
+=======
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -17,8 +20,11 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.*;
+<<<<<<< HEAD
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+=======
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
 
 import org.apache.flink.types.Row;
 import org.apache.hadoop.conf.Configuration;
@@ -33,7 +39,10 @@ import org.tikv.common.TiSession;
 import org.tikv.kvproto.Kvrpcpb;
 import org.tikv.raw.RawKVClient;
 import tikv.com.google.protobuf.ByteString;
+<<<<<<< HEAD
 import org.apache.hadoop.hbase.client.Result;
+=======
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
 
 public class TikvServiceImpl implements TiKVStorageService, Serializable {
     private String PD_ADDRESS;
@@ -49,6 +58,10 @@ public class TikvServiceImpl implements TiKVStorageService, Serializable {
     private BigInteger writeJSONTimes;
     Map<String, Object> featureTransMap;
     //private static final Logger logger = LoggerFactory.getLogger(TikvServiceImpl.class);
+<<<<<<< HEAD
+=======
+    //Map<String, Object> featureTransMap;
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
 
     public TikvServiceImpl(String pd_addr) throws IOException {
         PD_ADDRESS = pd_addr;
@@ -1010,6 +1023,7 @@ public class TikvServiceImpl implements TiKVStorageService, Serializable {
         //System.out.println("insert " + tkey.toStringUtf8() + '\t' + tvalue.toStringUtf8() + " into result");
     }
 
+<<<<<<< HEAD
     //将数据从Hbase导入TiKV
     @Override
     public void loadToTiKVFromHBase(String tableName, List<String> features) throws Exception {
@@ -1131,6 +1145,11 @@ public class TikvServiceImpl implements TiKVStorageService, Serializable {
 
         }
         storageService.close();
+=======
+    //函数已改，待验证
+    @Override
+    public void loadToTiKVFromHBase(String tableName, List<String> features) throws Exception {
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
     }
 
 
@@ -1139,8 +1158,13 @@ public class TikvServiceImpl implements TiKVStorageService, Serializable {
         Map<ByteString, ByteString> kvs = new HashMap<>();
         Map<ByteString, ByteString> index_flag = new HashMap<>();
         Map<ByteString, ByteString> index_date = new HashMap<>();
+<<<<<<< HEAD
  //       RawKVClient client;
  //       TiSession session;
+=======
+        RawKVClient client;
+        TiSession session;
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
 
         public TiKVPutTask(Map<ByteString, ByteString> kvs, Map<ByteString, ByteString> index_flag, Map<ByteString, ByteString> index_date) {
             //this.kvs = kvs;
@@ -1152,8 +1176,13 @@ public class TikvServiceImpl implements TiKVStorageService, Serializable {
                 this.index_flag.putAll(index_flag);
             }
             //this.client = client;
+<<<<<<< HEAD
 //            this.session = TiSession.create(TiConfiguration.createRawDefault(PD_ADDRESS));
 //            this.client = session.createRawClient();
+=======
+            this.session = TiSession.create(TiConfiguration.createRawDefault(PD_ADDRESS));
+            this.client = session.createRawClient();
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
         }
 
         @Override

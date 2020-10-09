@@ -111,7 +111,11 @@
               <transformers>
                 <transformer />
                 <transformer>
+<<<<<<< HEAD
                   <mainClass>cn.edu.neu.tiger.tikv.LoadDataToTiKV</mainClass>
+=======
+                  <mainClass>cn.edu.neu.tiger.tikv.data.WriteToKafka</mainClass>
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
                 </transformer>
               </transformers>
             </configuration>

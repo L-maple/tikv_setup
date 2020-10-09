@@ -48,6 +48,7 @@ public class Util {
 //        properties.setProperty(Constants.ZK_CONNECT,Constants.ZOOKEEPER_CLIENT);
         return properties;
     }
+<<<<<<< HEAD
     public static void updateUserRecordMap(String line, Map<String, Map<String, Integer>> userRecord) {
         if (!StringUtils.isBlank(line)) {
 
@@ -77,6 +78,9 @@ public class Util {
             }
         }
     }
+=======
+
+>>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
     public static void updateUserRecordMapByTiKV(String line, Map<String, Map<String, Integer>> userRecord) {
         if (!StringUtils.isBlank(line)) {
 
