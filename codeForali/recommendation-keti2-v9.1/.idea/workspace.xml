@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0fee315c-febe-45b7-9ed5-04038331cbf1" name="Default Changelist" comment="" />
+    <list default="true" id="0fee315c-febe-45b7-9ed5-04038331cbf1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../5_application_test.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../../5_application_test.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../demo/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../../demo/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../recommendation-keti2-v9.1/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../../recommendation-keti2-v9.1/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../recommendation-keti2-v9.1/alter_mainclass.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../recommendation-keti2-v9.1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../recommendation-keti2-v9.1/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../recommendation-keti2-v9.1/src/main/java/cn/edu/neu/tiger/RecPipelineWithPrometheus.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../recommendation-keti2-v9.1/src/main/java/cn/edu/neu/tiger/RecPipelineWithPrometheus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../recommendation-keti2-v9.1/src/main/java/cn/edu/neu/tiger/RecPipelineWithoutWrite.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../recommendation-keti2-v9.1/src/main/java/cn/edu/neu/tiger/RecPipelineWithoutWrite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../recommendation-keti2-v9.1/src/main/java/cn/edu/neu/tiger/tikv/data/CreateUserDataByTiKV.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../recommendation-keti2-v9.1/src/main/java/cn/edu/neu/tiger/tikv/data/CreateUserDataByTiKV.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../recommendation-keti2-v9.1/src/main/java/cn/edu/neu/tiger/tikv/data/WriteClickRecordToTiKV.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../recommendation-keti2-v9.1/src/main/java/cn/edu/neu/tiger/tikv/data/WriteClickRecordToTiKV.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../recommendation-keti2-v9.1/src/main/java/cn/edu/neu/tiger/tikv/impl/TikvServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../recommendation-keti2-v9.1/src/main/java/cn/edu/neu/tiger/tikv/impl/TikvServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../recommendation-keti2-v9.1/src/main/java/cn/edu/neu/tiger/tikv/mapfunc/RichRecallMapByTiKV.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../recommendation-keti2-v9.1/src/main/java/cn/edu/neu/tiger/tikv/mapfunc/RichRecallMapByTiKV.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +39,16 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\Administrator\Desktop\项目\示范应用系统文档整理\10.4号云备份\setup\codeForali\recommendation-keti2-v9.1\.idea" />
+      </set>
+    </option>
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -39,6 +62,7 @@
     </option>
   </component>
   <component name="ProjectId" id="1XR4ceEUiCqGKitpLTBBwbJbe02" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -157,6 +181,7 @@
       <workItem from="1581831424134" duration="1814000" />
       <workItem from="1581923482290" duration="1221000" />
       <workItem from="1600419231731" duration="2603000" />
+      <workItem from="1602082036637" duration="876000" />
     </task>
     <servers />
   </component>

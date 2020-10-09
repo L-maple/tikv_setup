@@ -1,0 +1,4 @@
+23:03:54,593 INFO  org.tikv.common.PDClient                                      - Switched to new leader: [tidb-cluster-pd-0.tidb-cluster-pd-peer.tidb-cluster.svc:2379]
+/usr/hadoop/hadoop-2.7.5/etc/hadoop
+23:03:54,819 WARN  org.apache.hadoop.util.NativeCodeLoader                       - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+json: 0

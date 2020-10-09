@@ -48,7 +48,35 @@ public class Util {
 //        properties.setProperty(Constants.ZK_CONNECT,Constants.ZOOKEEPER_CLIENT);
         return properties;
     }
+    public static void updateUserRecordMap(String line, Map<String, Map<String, Integer>> userRecord) {
+        if (!StringUtils.isBlank(line)) {
 
+            String[] cells = line.trim().split("\t");
+            String userId = cells[0];
+            String itemId = cells[1];
+            String flag = cells[2];
+
+            Map<String, Integer> itemMap;
+
+            if (!userRecord.containsKey(userId)) {
+                itemMap = new HashMap<>();
+                userRecord.put(userId, itemMap);
+            } else {
+                itemMap = userRecord.get(userId);
+            }
+
+            int num = 0;
+            if (itemMap.containsKey(itemId)) {
+                num = itemMap.get(itemId);
+            }
+
+            if (flag.equals("1")) {
+                itemMap.put(itemId, num + 2);
+            } else {
+                itemMap.put(itemId, num - 1);
+            }
+        }
+    }
     public static void updateUserRecordMapByTiKV(String line, Map<String, Map<String, Integer>> userRecord) {
         if (!StringUtils.isBlank(line)) {
 

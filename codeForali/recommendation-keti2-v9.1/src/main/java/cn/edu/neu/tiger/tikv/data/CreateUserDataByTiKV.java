@@ -72,7 +72,7 @@ public class CreateUserDataByTiKV {
 //    features.add("pred_virtual_feature31");
 //    features.add("pred_virtual_feature32");
 //    features.add("pred_virtual_feature33");
-    generate(475428); //10万条数据，每个kv对大小为1KB，user表数据量为10G
+    generate(4754280); //10万条数据，每个kv对大小为1KB，user表数据量为10G
   }
 
   // 创建一个user表，该表是由一个"cf"列族，以及由11个特征作为列来形成的，generate方法会向该表插入50条记录

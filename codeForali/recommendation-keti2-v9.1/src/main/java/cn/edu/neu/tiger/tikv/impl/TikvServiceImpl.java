@@ -7,6 +7,9 @@ import cn.edu.neu.tiger.tools.*;
 import com.alibaba.fastjson.JSONObject;
 import cn.edu.neu.tiger.tikv.service.TiKVStorageService;
 
+import cn.edu.neu.tiger.tikv.service.StorageService;
+import cn.edu.neu.tiger.tikv.impl.HBaseServiceImpl;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -14,6 +17,8 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.apache.flink.types.Row;
 import org.apache.hadoop.conf.Configuration;
@@ -28,6 +33,7 @@ import org.tikv.common.TiSession;
 import org.tikv.kvproto.Kvrpcpb;
 import org.tikv.raw.RawKVClient;
 import tikv.com.google.protobuf.ByteString;
+import org.apache.hadoop.hbase.client.Result;
 
 public class TikvServiceImpl implements TiKVStorageService, Serializable {
     private String PD_ADDRESS;
@@ -43,7 +49,6 @@ public class TikvServiceImpl implements TiKVStorageService, Serializable {
     private BigInteger writeJSONTimes;
     Map<String, Object> featureTransMap;
     //private static final Logger logger = LoggerFactory.getLogger(TikvServiceImpl.class);
-    //Map<String, Object> featureTransMap;
 
     public TikvServiceImpl(String pd_addr) throws IOException {
         PD_ADDRESS = pd_addr;
@@ -1005,9 +1010,127 @@ public class TikvServiceImpl implements TiKVStorageService, Serializable {
         //System.out.println("insert " + tkey.toStringUtf8() + '\t' + tvalue.toStringUtf8() + " into result");
     }
 
-    //函数已改，待验证
+    //将数据从Hbase导入TiKV
     @Override
     public void loadToTiKVFromHBase(String tableName, List<String> features) throws Exception {
+	    StorageService storageService = new HBaseServiceImpl(); // hbase服务的接口
+        storageService.open();
+
+        List<Result> results = (List<Result>)storageService.scanData(tableName, new ArrayList<>(), null, null);
+        // first decide the key format prefix
+        ByteString tkey;
+        String keyColumn;
+        if (tableName.equals(Constants.TABLE_USER)) {
+            tkey = ByteString.copyFromUtf8(String.format("%s#%s#", tableName + ",", "r" + ","));
+            keyColumn = "user_id";
+        } else if (tableName.equals(Constants.TABLE_ITEM)) {
+            tkey = ByteString.copyFromUtf8(String.format("%s#%s#%s", tableName + ",", "r" + ","));
+            keyColumn = "item_id";
+        } else if (tableName.equals(Constants.TABLE_CLICK)) {
+            tkey = ByteString.copyFromUtf8(String.format("%s#%s#", tableName + ",", "r" + ","));
+            keyColumn = "user_id";
+        } else {
+            throw new Exception("passing a wrong table to loadToTiKBFromHBase function: " + tableName);
+        }
+
+        try {
+            ExecutorService exec = Executors.newFixedThreadPool(100);
+            Map<ByteString,ByteString> kvs = new HashMap<>();
+            Map<ByteString,ByteString> index_flag = new HashMap<>();
+            Map<ByteString,ByteString> index_date = new HashMap<>();
+            String flag_name = null;
+            String flag_value = null;
+            String date_name = null;
+            String date_value = null;
+            ByteString ikey_flag = null;
+            ByteString ivalue_flag = null;
+            ByteString ikey_date = null;
+            ByteString ivalue_date = null;
+            Boolean isClick = false;
+            int count = 0;//每计数至1000个KV对，就调用一次线程进行插入
+            for (Result result : results) {
+                //kvs = new HashMap<>();
+                Map<String, String> row = HBaseUtil.getRowByCells(result,((HBaseServiceImpl) storageService).getFeatureTransMap());
+                ByteString kv_key;
+                if (tableName.equals(Constants.TABLE_USER) || tableName.equals(Constants.TABLE_ITEM))
+                    kv_key = tkey.concat(ByteString.copyFromUtf8(row.get(keyColumn)));
+                else {
+                    isClick = true;
+                    kv_key =
+                            tkey.concat(
+                                    ByteString.copyFromUtf8(
+                                            String.format("%s#%s", row.get(keyColumn) + ",", String.valueOf(RowID))));
+                    //分别创建基于flag和date的索引
+                    // ikey由tablePrefix_idxPrefix_indexID_ColumnsValue_rowID构成
+                    flag_name = "flag";
+                    flag_value = row.get("flag");
+                    date_name = "date";
+                    date_value = row.get("date");
+                    ikey_flag =
+                            ByteString.copyFromUtf8(
+                                    String.format(
+                                            "%s#%s#%s#%s#%s",
+                                            tableName + ",",
+                                            "i" + ",",
+                                            flag_name + ",",
+                                            flag_value + ",",
+                                            String.valueOf(RowID)));
+                    // ivalue为 user_id,rowID
+                    ivalue_flag =
+                            ByteString.copyFromUtf8(String.format("%s#%s", row.get(keyColumn) + ",", String.valueOf(RowID)));
+                    ikey_date =
+                            ByteString.copyFromUtf8(
+                                    String.format(
+                                            "%s#%s#%s#%s#%s",
+                                            tableName + ",",
+                                            "i" + ",",
+                                            date_name + ",",
+                                            date_value + ",",
+                                            String.valueOf(RowID)));
+                    ivalue_date =
+                            ByteString.copyFromUtf8(String.format("%s#%s", row.get(keyColumn) + ",", String.valueOf(RowID)));
+                }
+
+                RowID++;
+                //value由"colName1:colValue1,colName2:colValue2"的形式构成
+                String valueBuilder = "";
+                int kv_nums = row.size() - 1;
+                int i = 0;
+                for (Map.Entry<String, String> entry : row.entrySet()) {
+                    valueBuilder = valueBuilder + entry.getKey() + ":" + entry.getValue();
+                    if (i < kv_nums) {
+                        valueBuilder += ",";
+                        i++;
+                    }
+                }
+                ByteString kv_value = ByteString.copyFromUtf8(valueBuilder);
+
+                if (count < 1000){
+                    kvs.put(kv_key,kv_value);
+                    if (isClick){
+                        index_flag.put(ikey_flag,ivalue_flag);
+                        index_date.put(ikey_date,ivalue_date);
+                    }
+                    count++;
+                }else{
+                        /*调用线程处理tikv的写入操作
+                         Thread thread = new Thread(new TiKVPutTask(row,kv_key,client));
+                                                 thread.start();
+                                                                         */
+		     //使用线程池处理tikv的写入操作
+                    exec.execute(new TiKVPutTask(kvs,index_flag,index_date));
+                    count = 0;
+                    kvs.clear();
+                    index_date.clear();
+                    index_flag.clear();
+                }
+            }
+            exec.shutdown();
+
+        } catch (Exception ignore) {
+
+        }
+        storageService.close();
     }
 
 
@@ -1016,8 +1139,8 @@ public class TikvServiceImpl implements TiKVStorageService, Serializable {
         Map<ByteString, ByteString> kvs = new HashMap<>();
         Map<ByteString, ByteString> index_flag = new HashMap<>();
         Map<ByteString, ByteString> index_date = new HashMap<>();
-        RawKVClient client;
-        TiSession session;
+ //       RawKVClient client;
+ //       TiSession session;
 
         public TiKVPutTask(Map<ByteString, ByteString> kvs, Map<ByteString, ByteString> index_flag, Map<ByteString, ByteString> index_date) {
             //this.kvs = kvs;
@@ -1029,8 +1152,8 @@ public class TikvServiceImpl implements TiKVStorageService, Serializable {
                 this.index_flag.putAll(index_flag);
             }
             //this.client = client;
-            this.session = TiSession.create(TiConfiguration.createRawDefault(PD_ADDRESS));
-            this.client = session.createRawClient();
+//            this.session = TiSession.create(TiConfiguration.createRawDefault(PD_ADDRESS));
+//            this.client = session.createRawClient();
         }
 
         @Override

@@ -32,6 +32,7 @@ import org.apache.flink.streaming.api.environment.StreamContextEnvironment;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer011;
+import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.types.Row;
 import org.apache.flink.util.Collector;
 import org.slf4j.Logger;
@@ -47,13 +48,14 @@ public class RecPipelineWithPrometheus {
 	public static void main(String[] args) throws Exception {
 		StreamExecutionEnvironment streamEnv = StreamContextEnvironment.getExecutionEnvironment();
 		streamEnv.disableOperatorChaining();
+		streamEnv.setRestartStrategy(RestartStrategies.noRestart());
 		run(args, streamEnv);
 		streamEnv.execute();
 	}
 
 	public static void run(String[] args, StreamExecutionEnvironment streamEnv) throws Exception {
 		ParameterTool parameter = ParameterTool.fromArgs(args);
-		
+
 		/**
 		 * 1.kafka消费数据
 		 */
@@ -89,7 +91,7 @@ public class RecPipelineWithPrometheus {
 				.returns(TypeInformation.of(new TypeHint<Tuple3<String, List<String>, Long>>() {
 				})).name("Recall")
 				.setParallelism(recallParallelism);
-		
+
 		/**
 		 * 3.根据召回商品生成预测样本，kv（用户信息，商品信息）
 		 */
@@ -153,7 +155,7 @@ public class RecPipelineWithPrometheus {
 				.returns(TypeInformation.of(new TypeHint<Tuple3<String, List<String>, Long>>() {
 				})).setParallelism(sinkParallelism)
 				.name("WriteSink");
-			
+
 //		result.addSink(new SinkFunction<Tuple3<String, List<String>, Long>>() {
 //			@Override
 //			public void invoke(Tuple3<String, List<String>, Long> value, Context context) throws Exception {
