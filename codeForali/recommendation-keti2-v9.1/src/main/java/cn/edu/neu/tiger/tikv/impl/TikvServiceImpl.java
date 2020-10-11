@@ -6,13 +6,9 @@ import cn.edu.neu.tiger.tikv.mapfunc.RichRecallMapByTiKV;
 import cn.edu.neu.tiger.tools.*;
 import com.alibaba.fastjson.JSONObject;
 import cn.edu.neu.tiger.tikv.service.TiKVStorageService;
-
-<<<<<<< HEAD
 import cn.edu.neu.tiger.tikv.service.StorageService;
 import cn.edu.neu.tiger.tikv.impl.HBaseServiceImpl;
 
-=======
->>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -20,11 +16,8 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.*;
-<<<<<<< HEAD
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-=======
->>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
 
 import org.apache.flink.types.Row;
 import org.apache.hadoop.conf.Configuration;
@@ -39,10 +32,7 @@ import org.tikv.common.TiSession;
 import org.tikv.kvproto.Kvrpcpb;
 import org.tikv.raw.RawKVClient;
 import tikv.com.google.protobuf.ByteString;
-<<<<<<< HEAD
 import org.apache.hadoop.hbase.client.Result;
-=======
->>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
 
 public class TikvServiceImpl implements TiKVStorageService, Serializable {
     private String PD_ADDRESS;
@@ -58,10 +48,6 @@ public class TikvServiceImpl implements TiKVStorageService, Serializable {
     private BigInteger writeJSONTimes;
     Map<String, Object> featureTransMap;
     //private static final Logger logger = LoggerFactory.getLogger(TikvServiceImpl.class);
-<<<<<<< HEAD
-=======
-    //Map<String, Object> featureTransMap;
->>>>>>> 080bc189714b48509cca9350d9babcff9ce76a82
 
     public TikvServiceImpl(String pd_addr) throws IOException {
         PD_ADDRESS = pd_addr;
@@ -890,7 +876,7 @@ public class TikvServiceImpl implements TiKVStorageService, Serializable {
 	    
         }
 	//System.out.println("----------------------get all items cost:"+(System.currentTimeMillis() - getAllItemTime)+"ms -----------");
-	result.append(JSONObject.toJSONString(userInfo));
+	//result.append(JSONObject.toJSONString(userInfo));
         Row row = new Row(1);
         row.setField(0, result.toString().substring(0, result.length() - 1));
         return row;
