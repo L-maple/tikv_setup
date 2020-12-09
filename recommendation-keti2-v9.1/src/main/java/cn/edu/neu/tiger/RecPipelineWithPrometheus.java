@@ -60,6 +60,8 @@ public class RecPipelineWithPrometheus {
 		 * 1.kafka消费数据
 		 */
 		int kafkaParallelism = parameter.getInt("paraKafka", 1);
+		String KAFKA_BOOTSTRAP_VALUE = parameter.get("KAFKA_BOOTSTRAP_VALUE"); // 指定kafka集群地址,格式为：172.17.175.126:9092
+		String ZOOKEEPER_CLIENT = parameter.get("ZOOKEEPER_CLIENT"); // 指定ZOOKEEPER_CLIENT集群地址，格式为：172.21.0.15:2181,172.21.0.14:2181
 		if (kafkaParallelism <= 0) return;
 
 		DataStream<String> kafkaSourceStream =
