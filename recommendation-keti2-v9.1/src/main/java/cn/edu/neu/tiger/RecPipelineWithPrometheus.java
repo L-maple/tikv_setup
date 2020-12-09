@@ -32,7 +32,6 @@ import org.apache.flink.streaming.api.environment.StreamContextEnvironment;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer011;
-import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.types.Row;
 import org.apache.flink.util.Collector;
 import org.slf4j.Logger;
@@ -47,8 +46,6 @@ public class RecPipelineWithPrometheus {
 
 	public static void main(String[] args) throws Exception {
 		StreamExecutionEnvironment streamEnv = StreamContextEnvironment.getExecutionEnvironment();
-		streamEnv.disableOperatorChaining();
-		streamEnv.setRestartStrategy(RestartStrategies.noRestart());
 		run(args, streamEnv);
 		streamEnv.execute();
 	}
@@ -60,8 +57,6 @@ public class RecPipelineWithPrometheus {
 		 * 1.kafka消费数据
 		 */
 		int kafkaParallelism = parameter.getInt("paraKafka", 1);
-		String KAFKA_BOOTSTRAP_VALUE = parameter.get("KAFKA_BOOTSTRAP_VALUE"); // 指定kafka集群地址,格式为：172.17.175.126:9092
-		String ZOOKEEPER_CLIENT = parameter.get("ZOOKEEPER_CLIENT"); // 指定ZOOKEEPER_CLIENT集群地址，格式为：172.21.0.15:2181,172.21.0.14:2181
 		if (kafkaParallelism <= 0) return;
 
 		DataStream<String> kafkaSourceStream =
@@ -88,11 +83,21 @@ public class RecPipelineWithPrometheus {
 					.name("LoggingSink").disableChaining();
 			return;
 		}
-
-		DataStream<Tuple3<String, List<String>, Long>> itemsStream = kafkaSourceStreamWithTime.map(new RichRecallMapByTiKVWithPrometheus())
-				.returns(TypeInformation.of(new TypeHint<Tuple3<String, List<String>, Long>>() {
-				})).name("Recall")
-				.setParallelism(recallParallelism);
+		DataStream<Tuple3<String, List<String>, Long>> itemsStream;
+		boolean enableRecallCache=parameter.getBoolean("enableRecallCache", false);
+		int recallCacheMaximumSize=parameter.getInt("recallCacheMaximumSize",10000);//最大缓存数量
+		int recallCacheExpireAfterWrite=parameter.getInt("recallCacheExpireAfterWrite",60);//缓存过期时间单位秒
+		if (enableRecallCache){
+			itemsStream = kafkaSourceStreamWithTime.map(new RichRecallMapByTiKVWithPrometheus(recallCacheMaximumSize,recallCacheExpireAfterWrite))
+					.returns(TypeInformation.of(new TypeHint<Tuple3<String, List<String>, Long>>() {
+					})).name("Recall")
+					.setParallelism(recallParallelism);
+		}else {
+			itemsStream = kafkaSourceStreamWithTime.map(new RichRecallMapByTiKVWithPrometheus())
+					.returns(TypeInformation.of(new TypeHint<Tuple3<String, List<String>, Long>>() {
+					})).name("Recall")
+					.setParallelism(recallParallelism);
+		}
 
 		/**
 		 * 3.根据召回商品生成预测样本，kv（用户信息，商品信息）
@@ -109,10 +114,20 @@ public class RecPipelineWithPrometheus {
 					.name("LoggingSink").disableChaining();
 			return;
 		}
-
-		DataStream<Row> samples = itemsStream.map(new RichPredictMapByTiKVWithPrometheus()).returns(getTypeInfo())
-				.name("SampleGenerator")
-				.setParallelism(genParallelism);
+		DataStream<Row> samples;
+		boolean enableSampleGeneratorCache=parameter.getBoolean("enableSampleGeneratorCache", false);
+		int sampleGeneratorCacheMaximumSize=parameter.getInt("sampleGeneratorCacheMaximumSize",10000);//最大缓存数量
+		int sampleGeneratorCacheExpireAfterWrite=parameter.getInt("sampleGeneratorCacheExpireAfterWrite",60);//缓存过期时间单位秒
+		if (enableSampleGeneratorCache){
+			samples = itemsStream.map(new RichPredictMapByTiKVWithPrometheus(sampleGeneratorCacheMaximumSize,sampleGeneratorCacheExpireAfterWrite))
+					.returns(getTypeInfo())
+					.name("SampleGenerator")
+					.setParallelism(genParallelism);
+		}else {
+			samples = itemsStream.map(new RichPredictMapByTiKVWithPrometheus()).returns(getTypeInfo())
+					.name("SampleGenerator")
+					.setParallelism(genParallelism);
+		}
 
 		/**
 		 * 4.进行预测
