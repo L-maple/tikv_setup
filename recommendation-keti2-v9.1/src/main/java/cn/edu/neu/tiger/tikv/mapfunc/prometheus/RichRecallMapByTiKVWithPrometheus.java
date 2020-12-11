@@ -1,12 +1,13 @@
 package cn.edu.neu.tiger.tikv.mapfunc.prometheus;
 
 import cn.edu.neu.tiger.tikv.i2i.RecallFromTiKV;
-import cn.edu.neu.tiger.tools.HdfsUtil;
 import org.apache.flink.api.common.functions.RichMapFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.metrics.Counter;
+import org.apache.flink.shaded.guava18.com.google.common.cache.Cache;
+import org.apache.flink.shaded.guava18.com.google.common.cache.CacheBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class RichRecallMapByTiKVWithPrometheus extends RichMapFunction<Tuple2<String, Long>, Tuple3<String, List<String>, Long>> {
 
@@ -24,6 +26,21 @@ public class RichRecallMapByTiKVWithPrometheus extends RichMapFunction<Tuple2<St
 	private transient RecallFromTiKV recallFromTiKV;
 
 	private transient Map<String, Map<String, Object>> i2i;
+
+	private Cache<String, Tuple2<String, List<String>>> resultFromTiKVCache;
+	private boolean enableCache = false;
+	private int maximumSize = 0;
+	private int expireAfterWrite = 0;
+
+	public RichRecallMapByTiKVWithPrometheus() {
+
+	}
+
+	public RichRecallMapByTiKVWithPrometheus(int maximumSize, int expireAfterWrite) {
+		this.maximumSize = maximumSize;
+		this.expireAfterWrite = expireAfterWrite;
+		this.enableCache = true;
+	}
 
 	@Override
 	public void open(Configuration parameters) throws Exception {
@@ -44,13 +61,24 @@ public class RichRecallMapByTiKVWithPrometheus extends RichMapFunction<Tuple2<St
 		}
 //		this.i2i = HdfsUtil.readHDFS("text");
 		logger.info("i2i size: {}", this.i2i.size());
-
+		if (enableCache) {
+			this.resultFromTiKVCache = CacheBuilder.newBuilder()
+					.maximumSize(maximumSize)
+					.expireAfterWrite(expireAfterWrite, TimeUnit.SECONDS)
+					.build();
+		}
 	}
 
 	@Override
 	public Tuple3<String, List<String>, Long> map(Tuple2<String, Long> value) throws Exception {
 		//long time = System.currentTimeMillis();
-		Tuple2<String, List<String>> resultFromTiKV = recallFromTiKV.recall_new(value.f0, this.i2i);
+		Tuple2<String, List<String>> resultFromTiKV;
+		if (enableCache) {
+			resultFromTiKV = resultFromTiKVCache.get(value.f0, () -> recallFromTiKV.recall_new(value.f0, this.i2i));
+		} else {
+			resultFromTiKV = recallFromTiKV.recall_new(value.f0, this.i2i);
+		}
+
 		recall_data.inc();
 		//logger.info("{} recall cost: {}", value, (System.currentTimeMillis() - time));
 		return Tuple3.of(resultFromTiKV.f0, resultFromTiKV.f1, value.f1);
